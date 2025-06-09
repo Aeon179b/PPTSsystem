@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPTS评测机</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px; /* 添加基础内边距 */
+        }
+
+        .title {
+            font-size: 4.5rem;
+            margin-bottom: 40px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-align: center; /* 标题居中 */
+        }
+
+        .button-container {
+            display: flex;
+            gap: 60px;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: space-between;
+            flex-wrap: wrap; /* 允许换行 */
+            gap: 40px; /* 调整默认间距 */
+        }
+
+        .big-button {
+            background: #90EE90;
+            border: none;
+            border-radius: 12px;
+            padding: 30px 60px; /* 调整内边距 */
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 200px;
+            text-align: center;
+            white-space: normal;
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+            flex: 1; /* 允许按钮伸缩 */
+            min-width: 240px; /* 最小宽度 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .big-button {
+                width: 100%;
+                max-width: 400px;
+                padding: 20px 40px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .big-button {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">PPTS评测机</h1>
+    
+    <div class="button-container">
+        <button class="big-button" onclick="location.href='/PPTSsystem/choose.html'">
+            开始评测
+        </button>
+        <button class="big-button" onclick="handleExit()">
+            退出系统
+        </button>
+	
+    </div>
+
+    <script>
+        function handleExit() {
+            if(confirm('确定要退出系统吗？')) {
+                                window.close();
+            }
+        }
+
+        // 响应式布局处理
+        window.addEventListener('resize', adjustLayout);
+        adjustLayout();
+
+        function adjustLayout() {
+            // 保持按钮容器始终垂直居中
+            document.body.style.minHeight = `${window.innerHeight}px`;
+        }
+    </script>
+</body>
+</html>
