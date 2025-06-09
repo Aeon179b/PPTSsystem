@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>年龄验证系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #90EE90;
+            box-shadow: 0 0 8px rgba(52,152,219,0.3);
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            background: #90EE90;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background: #90EE90;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(41,128,185,0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(41,128,185,0.3);
+        }
+
+        @media (max-width: 480px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .container {
+                width: 90%;
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>请输入您的年龄</h2>
+        <div class="input-group">
+            <input type="text" id="ageInput" placeholder="请输入6-18之间的数字">
+            <button onclick="checkAge()">提交验证</button>
+        </div>
+    </div>
+
+    <script>
+    function checkAge() {
+        const ageInput = document.getElementById('ageInput').value.trim();
+        const ageRegex = /^[6-9]|[1][0-8]$/; // 匹配6-18的数字
+
+        if (!ageRegex.test(ageInput)) {
+            showToast('请检查输入是否为6-18之间的纯数字');
+            return;
+        }
+
+        const age = parseInt(ageInput, 10);
+        const target = age <= 12 ? '/PPTSsystem/pri/1.html' : '/PPTSsystem/mid/1.html';
+        
+        // 实际跳转前添加延迟以便用户看到反馈
+        showToast('验证通过，正在跳转...', 500).then(() => {
+            window.location.href = target;
+        });
+    }
+
+    function showToast(message, delay = 2000) {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            animation: fadeIn 0.3s, fadeOut 0.3s ${delay - 300}ms;
+        `;
+
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, delay);
+
+        return new Promise(resolve => setTimeout(resolve, delay));
+    }
+    </script>
+</body>
+</html>
