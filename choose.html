@@ -118,7 +118,7 @@
         }
 
         const age = parseInt(ageInput, 10);
-        const target = age <= 12 ? '/PPTSsystem/pri/1.html' : '/PPTSsystem/mid/1.html';
+        const target = age <= 12 ? '/pri/1.html' : '/mid/1.html';
         
         // 实际跳转前添加延迟以便用户看到反馈
         showToast('验证通过，正在跳转...', 500).then(() => {
